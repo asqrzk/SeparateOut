@@ -46,7 +46,7 @@ const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSuccess }) => {
           </div>
 
           <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-            To use SeparateOut AI, you need your own Google Gemini API key. 
+            To use SeparateOut, you need your own Google Gemini API key. 
             Your key is stored locally in your browser and never sent to our servers.
           </p>
 

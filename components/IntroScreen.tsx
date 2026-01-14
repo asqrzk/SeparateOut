@@ -72,7 +72,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
       {/* Content */}
       <div className={`absolute bottom-24 flex flex-col items-center transition-all duration-1000 ${phase >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-3 tracking-tighter text-center">
-          SeparateOut <span className="text-blue-500">AI</span>
+          SeparateOut
         </h1>
         <p className="text-slate-400 text-sm md:text-base mb-8 uppercase tracking-[0.4em] font-bold">Research. Write. Visualize.</p>
         

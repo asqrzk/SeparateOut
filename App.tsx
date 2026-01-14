@@ -203,7 +203,7 @@ const App: React.FC = () => {
             <div className="bg-blue-600 p-2 rounded-xl shadow-lg shadow-blue-500/20">
                 <Zap className="w-5 h-5 text-white fill-current" />
             </div>
-            <h1 className="font-bold text-xl tracking-tight hidden sm:block">SeparateOut <span className="text-blue-600">AI</span></h1>
+            <h1 className="font-bold text-xl tracking-tight hidden sm:block">SeparateOut</h1>
           </div>
           <div className="flex items-center gap-4">
             <a 
