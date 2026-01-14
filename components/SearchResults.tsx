@@ -16,7 +16,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, searchEntryPoint
   if ((!results || results.length === 0) && !searchEntryPointHtml) return null;
 
   return (
-    <div className="w-full max-w-6xl mx-auto mt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+    <div className="w-full mt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8 border-t border-slate-200 dark:border-white/10 pt-10 transition-colors">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400 shadow-sm border border-blue-100 dark:border-blue-800">

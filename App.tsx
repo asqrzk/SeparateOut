@@ -16,7 +16,7 @@ import SearchResults from './components/SearchResults';
 import Carousel from './components/Carousel';
 import ApiKeyModal from './components/ApiKeyModal';
 import { 
-  ChevronRight, Copy, Check, ArrowLeft, Zap, Sun, Moon, Search, Loader2, AlertCircle, XCircle
+  ChevronRight, Copy, Check, ArrowLeft, Zap, Sun, Moon, Search, Loader2, AlertCircle, XCircle, Github
 } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -64,6 +64,14 @@ const App: React.FC = () => {
     setHasApiKey(true);
     setShowKeyModal(false);
     setShowIntro(false);
+  };
+
+  const handleClearKey = () => {
+    localStorage.removeItem('gemini_api_key');
+    setHasApiKey(false);
+    setShowKeyModal(true);
+    setDraft(null);
+    setStage('INPUT');
   };
 
   const handleApiError = async (err: any) => {
@@ -198,6 +206,24 @@ const App: React.FC = () => {
             <h1 className="font-bold text-xl tracking-tight hidden sm:block">SeparateOut <span className="text-blue-600">AI</span></h1>
           </div>
           <div className="flex items-center gap-4">
+            <a 
+              href="https://github.com/asqrzk/SeparateOut" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg text-xs font-bold border border-slate-200 dark:border-white/10 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+            >
+              <Github className="w-3.5 h-3.5" />
+              <span>OPEN SOURCE</span>
+            </a>
+            {hasApiKey && (
+              <button 
+                onClick={handleClearKey}
+                className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-xs font-bold border border-red-100 dark:border-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
+              >
+                <XCircle className="w-3.5 h-3.5" />
+                <span>CLEAR KEY</span>
+              </button>
+            )}
             {!hasApiKey && (
               <button 
                 onClick={() => setShowKeyModal(true)} 
