@@ -1,7 +1,5 @@
 # SeparateOut
 
-![SeparateOut Banner](https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6)
-
 **SeparateOut** is a powerful tool designed to help professionals create high-impact LinkedIn carousel posts. By leveraging the power of Google's Gemini models, it researches topics, synthesizes viral-ready narratives, and generates premium, professional-grade visuals for each slide—all in seconds.
 
 ## 🚀 Features
@@ -80,7 +78,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 This project is open source and available under the [MIT License](LICENSE).
 
 ---
-
-<div align="center">
-  <sub>Built with ❤️ using Google Gemini API</sub>
-</div>
