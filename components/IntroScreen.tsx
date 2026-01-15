@@ -74,7 +74,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
         <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-3 tracking-tighter text-center">
           SeparateOut
         </h1>
-        <p className="text-slate-400 text-sm md:text-base mb-8 uppercase tracking-[0.4em] font-bold">Research. Write. Visualize.</p>
+        <p className="text-slate-400 text-sm md:text-base mb-8 uppercase tracking-[0.4em] font-bold">Be separated out on LinkedIn</p>
         
         <button 
           onClick={onComplete}
@@ -89,7 +89,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
 
       <div className="absolute bottom-8 flex items-center gap-2 text-slate-600 text-[10px] font-bold tracking-[0.2em]">
         <Globe className="w-3 h-3" />
-        POWERED BY GEMINI 3 & GOOGLE SEARCH
+        GEN AI using Gemini 3 & Google Search
       </div>
     </div>
   );
