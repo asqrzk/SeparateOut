@@ -5,31 +5,26 @@
 */
 import React, { useState, useEffect } from 'react';
 import { Loader2, Zap, Briefcase, Globe, PenTool, Sparkles, BrainCircuit } from 'lucide-react';
+import { Language } from '../types';
+import { loadingCopy } from '../i18n/copy';
 
 interface LoadingProps {
   status: string;
   step: number;
+  language: Language;
 }
 
-const messages = [
-  "Initializing deep research engines...",
-  "Querying Google Search for market insights...",
-  "Model is thinking: synthesizing logical connections...",
-  "Architecting the narrative structure...",
-  "Applying specific tone & viral hook patterns...",
-  "Polishing for high professional impact...",
-  "Defining visual asset prompts for each insight..."
-];
-
-const Loading: React.FC<LoadingProps> = ({ status }) => {
+const Loading: React.FC<LoadingProps> = ({ status, language }) => {
   const [msgIndex, setMsgIndex] = useState(0);
+  const t = loadingCopy[language];
 
   useEffect(() => {
+    setMsgIndex(0);
     const interval = setInterval(() => {
-      setMsgIndex((prev) => (prev + 1) % messages.length);
+      setMsgIndex((prev) => (prev + 1) % t.messages.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [language, t.messages.length]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[600px] text-center space-y-12 max-w-lg mx-auto p-6">
@@ -53,7 +48,7 @@ const Loading: React.FC<LoadingProps> = ({ status }) => {
           {status}
         </h3>
         <p className="text-blue-600 dark:text-blue-400 font-black uppercase tracking-[0.3em] text-[10px] animate-pulse h-4">
-          {messages[msgIndex]}
+          {t.messages[msgIndex]}
         </p>
       </div>
 
@@ -66,19 +61,19 @@ const Loading: React.FC<LoadingProps> = ({ status }) => {
             <div className={`p-4 rounded-[1.25rem] transition-all ${msgIndex < 2 ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 shadow-lg' : 'bg-slate-50 dark:bg-slate-900 text-slate-400'}`}>
                <Globe className={`w-7 h-7 ${msgIndex < 2 ? 'animate-spin duration-[4000ms]' : ''}`} />
             </div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Research</span>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t.labels.research}</span>
          </div>
          <div className="flex flex-col items-center gap-3">
             <div className={`p-4 rounded-[1.25rem] transition-all ${msgIndex >= 2 && msgIndex < 4 ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 shadow-lg' : 'bg-slate-50 dark:bg-slate-900 text-slate-400'}`}>
                <BrainCircuit className={`w-7 h-7 ${msgIndex >= 2 && msgIndex < 4 ? 'animate-pulse' : ''}`} />
             </div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Reasoning</span>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t.labels.reasoning}</span>
          </div>
          <div className="flex flex-col items-center gap-3">
             <div className={`p-4 rounded-[1.25rem] transition-all ${msgIndex >= 4 ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 shadow-lg' : 'bg-slate-50 dark:bg-slate-900 text-slate-400'}`}>
                <PenTool className={`w-7 h-7 ${msgIndex >= 4 ? 'animate-bounce' : ''}`} />
             </div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Synthesis</span>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t.labels.synthesis}</span>
          </div>
       </div>
 

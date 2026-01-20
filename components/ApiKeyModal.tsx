@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { Key, ArrowRight, Lock, AlertCircle } from 'lucide-react';
 import { setGeminiApiKey } from '../services/geminiService';
+import { Language } from '../types';
+import { apiKeyModalCopy } from '../i18n/copy';
 
 interface ApiKeyModalProps {
   onSuccess: () => void;
+  language: Language;
 }
 
-const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSuccess }) => {
+const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSuccess, language }) => {
   const [inputKey, setInputKey] = useState('');
   const [error, setError] = useState('');
+  const t = apiKeyModalCopy[language];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputKey.trim()) {
-      setError('Please enter a valid API key');
+      setError(t.errorEmpty);
       return;
     }
     
@@ -40,19 +44,18 @@ const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSuccess }) => {
               <Key className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-xl font-bold">Enter API Key</h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400">Gemini API Access</p>
+              <h2 className="text-xl font-bold">{t.title}</h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{t.subtitle}</p>
             </div>
           </div>
 
           <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-            To use SeparateOut, you need your own Google Gemini API key. 
-            Your key is stored locally in your browser and never sent to our servers.
+            {t.description}
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-400">API KeyString</label>
+              <label className="text-xs font-bold uppercase tracking-wider text-slate-400">{t.label}</label>
               <div className="relative group">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
                 <input 
@@ -63,7 +66,7 @@ const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSuccess }) => {
                     setError('');
                   }}
                   className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 dark:text-white"
-                  placeholder="AIza..."
+                  placeholder={t.placeholder}
                   autoFocus
                 />
               </div>
@@ -79,7 +82,7 @@ const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSuccess }) => {
                 type="submit"
                 className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-500/20 active:scale-95"
               >
-                Start Creating <ArrowRight className="w-4 h-4" />
+                {t.submit} <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </form>
@@ -91,7 +94,7 @@ const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSuccess }) => {
               rel="noreferrer"
               className="text-xs text-slate-400 hover:text-blue-500 underline decoration-slate-300 underline-offset-4 transition-colors"
             >
-              Get a free API key from Google AI Studio
+              {t.link}
             </a>
           </div>
         </div>

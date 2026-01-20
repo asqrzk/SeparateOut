@@ -3,18 +3,21 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState } from 'react';
-import { GeneratedImage } from '../types';
+import { GeneratedImage, Language } from '../types';
+import { infographicCopy } from '../i18n/copy';
 import { Download, Maximize2, X, ZoomIn, ZoomOut, Loader2 } from 'lucide-react';
 
 interface InfographicProps {
   image: GeneratedImage;
   isEditing?: boolean;
   compact?: boolean;
+  language?: Language;
 }
 
-const Infographic: React.FC<InfographicProps> = ({ image, isEditing, compact = false }) => {
+const Infographic: React.FC<InfographicProps> = ({ image, isEditing, compact = false, language = 'en' }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
+  const t = infographicCopy[language];
 
   const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.5, 4));
   const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.5, 0.5));
@@ -43,7 +46,7 @@ const Infographic: React.FC<InfographicProps> = ({ image, isEditing, compact = f
             type="button"
             onClick={(e) => { e.stopPropagation(); setIsFullscreen(true); }}
             className="bg-black/60 backdrop-blur-md text-white p-2.5 rounded-xl shadow-lg hover:bg-blue-600 transition-colors border border-white/10"
-            title="Fullscreen View"
+            title={t.fullscreen}
           >
             <Maximize2 className="w-4 h-4" />
           </button>
@@ -54,7 +57,7 @@ const Infographic: React.FC<InfographicProps> = ({ image, isEditing, compact = f
           <div className="absolute inset-0 z-40 bg-slate-950/40 backdrop-blur-[2px] flex items-center justify-center">
              <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-2xl flex items-center gap-3">
                <Loader2 className="w-5 h-5 text-blue-600 animate-spin" />
-               <span className="text-xs font-bold uppercase tracking-widest">Generating...</span>
+               <span className="text-xs font-bold uppercase tracking-widest">{t.generating}</span>
              </div>
           </div>
         )}

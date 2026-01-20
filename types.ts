@@ -6,6 +6,7 @@
 export type AppStage = 'INPUT' | 'EDITING' | 'VISUALS' | 'FINAL';
 
 export type Tone = 'Professional' | 'Casual' | 'Inspirational' | 'Thought Leader' | 'Controversial';
+export type Language = 'en' | 'ar';
 
 export interface PostPoint {
   id: string;
