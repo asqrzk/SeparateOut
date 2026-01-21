@@ -4,16 +4,19 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React from 'react';
-import { SearchResultItem } from '../types';
+import { Language, SearchResultItem } from '../types';
+import { searchResultsCopy } from '../i18n/copy';
 import { ExternalLink, BookOpen, Link as LinkIcon, Search } from 'lucide-react';
 
 interface SearchResultsProps {
   results: SearchResultItem[];
   searchEntryPointHtml?: string;
+  language: Language;
 }
 
-const SearchResults: React.FC<SearchResultsProps> = ({ results, searchEntryPointHtml }) => {
+const SearchResults: React.FC<SearchResultsProps> = ({ results, searchEntryPointHtml, language }) => {
   if ((!results || results.length === 0) && !searchEntryPointHtml) return null;
+  const t = searchResultsCopy[language];
 
   return (
     <div className="w-full mt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
@@ -22,7 +25,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, searchEntryPoint
           <div className="p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400 shadow-sm border border-blue-100 dark:border-blue-800">
               <BookOpen className="w-5 h-5" />
           </div>
-          <h3 className="text-xs font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.25em]">Research Grounding</h3>
+          <h3 className="text-xs font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.25em]">{t.title}</h3>
         </div>
 
         {searchEntryPointHtml && (
@@ -58,7 +61,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, searchEntryPoint
                   try {
                     return new URL(result.url).hostname.replace('www.', '');
                   } catch {
-                    return 'External Source';
+                    return t.externalSource;
                   }
                 })()}
               </span>

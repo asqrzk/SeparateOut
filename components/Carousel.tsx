@@ -4,7 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState, useRef } from 'react';
-import { PostPoint } from '../types';
+import { Language, PostPoint } from '../types';
+import { carouselCopy } from '../i18n/copy';
 import { 
   ChevronLeft, ChevronRight, ThumbsUp, MessageSquare, Repeat, Send, MoreHorizontal, Globe, Download, Images
 } from 'lucide-react';
@@ -39,11 +40,13 @@ interface CarouselProps {
   points: PostPoint[];
   caption?: string;
   onEditImage: (pointId: string, instruction: string) => void;
+  language: Language;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ points, caption, onEditImage }) => {
+const Carousel: React.FC<CarouselProps> = ({ points, caption, onEditImage, language }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const t = carouselCopy[language];
 
   /* --- ACTIONS --- */
   const scrollCarousel = (direction: number) => {
@@ -105,12 +108,12 @@ const Carousel: React.FC<CarouselProps> = ({ points, caption, onEditImage }) => 
           </div>
           <div className="flex-grow">
             <div className="flex items-center">
-              <span className="font-semibold text-[14px] text-[--li-text-primary] dark:text-slate-100 mr-1.5 cursor-pointer hover:text-[--li-blue] hover:underline">SeparateOut User</span>
-              <span className="text-[--li-text-secondary] dark:text-slate-400 text-[14px]">• 1st</span>
+              <span className="font-semibold text-[14px] text-[--li-text-primary] dark:text-slate-100 mr-1.5 cursor-pointer hover:text-[--li-blue] hover:underline">{t.userName}</span>
+              <span className="text-[--li-text-secondary] dark:text-slate-400 text-[14px]">{t.connection}</span>
             </div>
-            <div className="text-[12px] text-[--li-text-secondary] dark:text-slate-400 leading-[1.33]">Content Creator | Thought Leader</div>
+            <div className="text-[12px] text-[--li-text-secondary] dark:text-slate-400 leading-[1.33]">{t.role}</div>
             <div className="flex items-center text-[12px] text-[--li-text-secondary] dark:text-slate-400 mt-0.5">
-              <span>Just now • </span>
+              <span>{t.time} • </span>
               <Globe className="w-3 h-3 ml-1" />
             </div>
           </div>
@@ -121,7 +124,7 @@ const Carousel: React.FC<CarouselProps> = ({ points, caption, onEditImage }) => 
 
         {/* Caption (Full Text with Markdown) */}
         <div className="px-4 pb-2 text-[14px] text-[--li-text-primary] dark:text-slate-200 leading-[1.5] whitespace-pre-wrap">
-          {renderCaption(caption || "Check out this carousel...")}
+          {renderCaption(caption || t.captionFallback)}
         </div>
 
         {/* Carousel Wrapper */}
@@ -156,6 +159,7 @@ const Carousel: React.FC<CarouselProps> = ({ points, caption, onEditImage }) => 
                   onEdit={(instr) => onEditImage(point.id, instr)}
                   isEditing={point.isGenerating || false}
                   compact
+                  language={language}
                 />
               </div>
             ))}
@@ -165,17 +169,17 @@ const Carousel: React.FC<CarouselProps> = ({ points, caption, onEditImage }) => 
         {/* Footer Strip */}
         <div className="bg-[#f3f2ef] dark:bg-slate-800/50 px-4 py-2.5 flex justify-between items-center border-t border-[--li-border] dark:border-white/5 text-[12px] text-[--li-text-secondary] dark:text-slate-400">
           <div className="font-medium text-[--li-text-primary] dark:text-slate-200 truncate max-w-[50%]">
-            {points[0]?.title || "Carousel Document"}
+            {points[0]?.title || t.documentTitle}
           </div>
           <div className="flex items-center gap-3">
-             <span>{activeIndex + 1} of {points.length}</span>
+             <span>{activeIndex + 1} {t.of} {points.length}</span>
              <button 
                 onClick={handleDownloadAll}
                 className="flex items-center gap-1 text-blue-600 hover:underline font-semibold"
-                title="Download All Slides"
+                title={t.downloadAllTitle}
              >
                <Download className="w-3.5 h-3.5" />
-               <span className="hidden sm:inline">Download</span>
+               <span className="hidden sm:inline">{t.download}</span>
              </button>
           </div>
         </div>
@@ -197,16 +201,16 @@ const Carousel: React.FC<CarouselProps> = ({ points, caption, onEditImage }) => 
               1,245
            </div>
            <div className="text-[12px] text-[--li-text-secondary] dark:text-slate-400 hover:text-[--li-blue] hover:underline cursor-pointer">
-             88 comments • 24 reposts
+             {t.stats}
            </div>
         </div>
 
         {/* Action Buttons */}
         <div className="flex justify-between px-2 py-1 bg-white dark:bg-slate-900">
-          <ActionButton icon={ThumbsUp} label="Like" />
-          <ActionButton icon={MessageSquare} label="Comment" />
-          <ActionButton icon={Repeat} label="Repost" />
-          <ActionButton icon={Send} label="Send" />
+          <ActionButton icon={ThumbsUp} label={t.actions.like} />
+          <ActionButton icon={MessageSquare} label={t.actions.comment} />
+          <ActionButton icon={Repeat} label={t.actions.repost} />
+          <ActionButton icon={Send} label={t.actions.send} />
         </div>
       </div>
     </div>

@@ -5,17 +5,21 @@
 */
 import React, { useState, useEffect } from 'react';
 import { Play, Globe, Zap, Network } from 'lucide-react';
+import { Language } from '../types';
+import { introCopy } from '../i18n/copy';
 
 interface IntroScreenProps {
   onComplete: () => void;
+  language: Language;
 }
 
-const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
+const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete, language }) => {
   const [phase, setPhase] = useState(0); 
   // 0: Initializing
   // 1: Researching
   // 2: Synthesis
   // 3: Ready
+  const t = introCopy[language];
 
   useEffect(() => {
     const timer1 = setTimeout(() => setPhase(1), 800);
@@ -74,7 +78,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
         <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-3 tracking-tighter text-center">
           SeparateOut
         </h1>
-        <p className="text-slate-400 text-sm md:text-base mb-8 uppercase tracking-[0.4em] font-bold">Be separated out on LinkedIn</p>
+        <p className="text-slate-400 text-sm md:text-base mb-8 uppercase tracking-[0.4em] font-bold">{t.tagline}</p>
         
         <button 
           onClick={onComplete}
@@ -82,14 +86,14 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
         >
           <div className="absolute inset-0 bg-blue-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
           <span className="relative group-hover:text-white flex items-center gap-2">
-            START CREATING <Play className="w-4 h-4 fill-current" />
+            {t.start} <Play className="w-4 h-4 fill-current" />
           </span>
         </button>
       </div>
 
       <div className="absolute bottom-8 flex items-center gap-2 text-slate-600 text-[10px] font-bold tracking-[0.2em]">
         <Globe className="w-3 h-3" />
-        GEN AI using Gemini 3 & Google Search
+        {t.footer}
       </div>
     </div>
   );
