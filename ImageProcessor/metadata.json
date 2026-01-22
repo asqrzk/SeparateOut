@@ -1,0 +1,7 @@
+{
+  "name": "LinkedIn Carousel Master",
+  "description": "Create high-impact, professional LinkedIn carousel slides with a modern black and lime-green tech aesthetic using AI.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
